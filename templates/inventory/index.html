@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+</head>
+<body>
+    <h1>Inventory</h1>
+
+    <form method="post" action="{{ url_for('inventory_add', projectname=projectname) }}">
+        <label for="item">Item:</label>
+        <input type="text" name="item" required>
+        <br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" required>
+        <br>
+        <label for="rate">Rate:</label>
+        <input type="number" name="rate" step="0.01" required>
+        <br>
+        <input type="submit" value="Add Item">
+    </form>
+
+    <form method="post" action="{{ url_for('inventory_addai', projectname=projectname) }}">
+        <label for="ai">AI Add</label>
+        <textarea id="ai" name="ai" rows="4" cols="50"></textarea>
+        <input type="submit" value="Add Items">
+    </form>
+    
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Item</th>
+                <th>Available Quantity</th>
+                <th>Rate</th>
+                <th>Total Price</th>
+                <th>Add Entry</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in inventory %}
+                <tr>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[3] }}</td>
+                    <td>{{ item[4] }}</td>
+                    <td><a href="{{ url_for('inventory_view_entry', id=item[0], projectname=projectname) }}">Add Entry</a></td>
+                    <td><a href="{{ url_for('inventory_edit', id=item[0], projectname=projectname) }}">Edit</a></td>
+                    <td><a href="{{ url_for('inventory_delete', id=item[0], projectname=projectname) }}" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1>Total Price</h1>
+    <p>Total Price: {{ total_price }}</p>
+</body>
+</html>

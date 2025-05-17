@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Worker Data</title>
+</head>
+<body>
+    <h2>Departments: {{ projectname }}</h2>
+        <a href="{{ url_for('manpower_add_department', projectname=projectname) }}">Add Department</a>
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>Sno</th>
+                <th>Department</th>
+                <th>Count</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dept in manpower_departments %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ dept[1] }}</td>
+                    <td>{{ dept[2] }}</td>
+                    <td><a href="{{ url_for('manpower_edit_department', projectname=projectname, department_id=dept[0]) }}">Edit</a></td>
+                    <td><a href="{{ url_for('manpower_delete_department', projectname=projectname, department_id=dept[0]) }}">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table><br>
+    <a href="{{ url_for('manpower_index', projectname=projectname) }}">Back to Add Workers</a>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Department</title>
+    <style>
+        .section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Add Department</h2>
+    <form action="{{ url_for('manpower_add_departmentdata', projectname=projectname) }}" method="post">
+        <label for="DepartmentName">Department Name:</label>
+        <input type="text" id="DepartmentName" name="DepartmentName" required><br>
+
+        <label for="DepartmentCount">Department Count:</label>
+        <input type="text" id="DepartmentCount" name="DepartmentCount" required><br>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

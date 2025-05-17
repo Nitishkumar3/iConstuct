@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Hello, {{ username }}!</h2>
+    <p>This is your dashboard.</p><br>
+<a href="{{ url_for('user_profile') }}">Profile</a><br> 
+<a href="{{ url_for('project_form') }}">Add project</a><br>
+<br>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Sno.</th>
+            <th>Project Name</th>
+            <th>View</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ project[1] }}</td>
+           
+                <td><a href="{{ url_for('project_dashboard', projectname=project[1])}}">View</a></td>
+                <td><a href="{{ url_for('project_delete', projectname=project[1])}}">Delete</a></td>
+            </tr>
+            {% endfor %}
+    </tbody>
+
+</table>
+
+<br>
+
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

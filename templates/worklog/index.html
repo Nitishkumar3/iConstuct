@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .post-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .post-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 80%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.post-box img {
+    max-width: 100%;  /* Set maximum width to 100% to ensure responsiveness */
+    height: 150px;    /* Set a fixed height for consistency, adjust as needed */
+    object-fit: cover; /* Maintain aspect ratio and cover the entire space */
+    margin-bottom: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Worklog</h1>
+    <a href="{{ url_for('worklog_add', projectname=projectname) }}">Add Work</a><br><br>
+    <div class="post-container">
+        {% for post in posts %}
+            <div class="post-box">
+                <h3>{{ post[2] }}</h3>
+                <p>{{ post[1] }}</p>
+                <p>{{ post[3] }}</p>
+                <div>
+                    {% for photo_url in post[4] %}
+                        <img src="{{ photo_url }}" alt="Photo">
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

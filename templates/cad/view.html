@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View File</title>
+</head>
+<body>
+    <h1>View File</h1>
+    <h2>File</h2>
+    <img src="{{ url_for('cad_converted_file', filename=filename, projectname=projectname) }}" width="800" height="600">
+
+    <br>
+    <a href="{{ url_for('cad_index', projectname=projectname) }}">Back to Files</a>
+</body>
+</html>

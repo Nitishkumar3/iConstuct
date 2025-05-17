@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+</head>
+<body>
+    <h1>Hourly Weather Forecast</h1>
+    City: {{city}}
+    <br>
+    Country: India
+    
+    <h3>Ideal Working Time</h3>
+    {% for data in timeIntervals %}
+    {{data}}<br>
+    {% endfor %}
+    <br>
+    <table border="1">
+        <tr>
+            <th>Time</th>
+            <th>Temperature (°C)</th>
+            <th>Chance of Rain (%)</th>
+            <th>Wind Speed (km/h)</th>
+            <th>Air Quality Index (AQI)</th>
+            <th>UV Index</th>
+        </tr>
+        {% for entry in hourly_forecast %}
+        <tr>
+            <td>{{ entry['time'] }}</td>
+            <td>{{ entry['temperature'] }}</td>
+            <td>{{ entry['chance_of_rain'] }}</td>
+            <td>{{ entry['wind_speed'] }}</td>
+            <td>{{ entry['aqi'] }}</td>
+            <td>{{ entry['uv_index'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

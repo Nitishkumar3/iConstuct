@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Entries</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            showRateField(); // Call the function on page load
+
+            function showRateField() {
+                var typeSelect = document.getElementById("entryType");
+                var rateField = document.getElementById("rateField");
+
+                if (typeSelect.value === "in") {
+                    rateField.style.display = "block";
+                    document.getElementsByName("rate")[0].required = true;
+                } else {
+                    rateField.style.display = "none";
+                    document.getElementsByName("rate")[0].required = false;
+                }
+            }
+
+            // Attach the showRateField function to the change event of the type select
+            document.getElementById("entryType").addEventListener('change', showRateField);
+        });
+    </script>
+</head>
+<body>
+    <h1>{{inventory_data[1]}}</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Rate</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+                <tr>
+                    <td>{{ inventory_data[1] }}</td>
+                    <td>{{ inventory_data[2] }}</td>
+                    <td>{{ inventory_data[3] }}</td>
+                    <td>{{ inventory_data[4] }}</td>
+            
+                </tr>
+        
+        </tbody>
+    </table>
+    <br>
+    <h3>Add Entry</h3>
+    <form method="post" action="{{ url_for('inventory_add_entry', id=id, projectname=projectname) }}" id="addEntryForm">
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" required>
+        <br>
+        <label for="type">Type:</label>
+        <select name="type" id="entryType" onchange="showRateField()">
+            <option value="in">In</option>
+            <option value="used">Used</option>
+        </select>
+        <br>
+        <div id="rateField" style="display: none;">
+            <label for="rate">Rate:</label>
+            <input type="number" name="rate" step="0.01" required>
+            <br>
+        </div>
+        <input type="submit" value="Add Entry">
+    </form>
+<br>
+
+
+
+<br>
+    {% if entries %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Type</th>
+                    <th>Rate</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                    <tr>
+                        <td>{{ entry.quantity }}</td>
+                        <td>{{ entry.type }}</td>
+                        <td>{{ entry.rate }}</td>
+                        <td><a href="{{ url_for('inventory_delete_entry', id=id, index=loop.index, projectname=projectname) }}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No entries found for this item.</p>
+    {% endif %}
+
+    
+    <br>
+    <a href="{{ url_for('inventory', projectname=projectname) }}">Back to Inventory</a>
+</body>
+</html>

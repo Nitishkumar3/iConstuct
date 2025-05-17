@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Data</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Worker Data</h2>
+    <form action="{{url_for('add_worker_data', projectname=projectname)}}" method="post" id="workerDataForm">
+        <table id="workerTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Department</th>
+                    <th>Aadhar ID</th>
+                    <th>Native City</th>
+                    <th>Emergency Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="worker-data">
+                    <td><input type="text" name="name[]" required></td>
+                    <td><input type="tel" name="phone[]" required></td>
+                    <td>
+                        <select name="department[]" required></select>
+                    </td>
+                    <td><input type="text" name="aadharid[]" required></td>
+                    <td><input type="text" name="nativecity[]" required></td>
+                    <td><input type="tel" name="emergencycontact[]" required></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <button type="button" onclick="addWorkerField()">Add More</button>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        // Fetch departments from Flask route and populate the dropdown
+        fetch('/project/{{ projectname }}/get_departments')
+            .then(response => response.json())
+            .then(departments => {
+                var departmentDropdowns = document.querySelectorAll('select[name="department[]"]');
+                departments.forEach(department => {
+                    var option = document.createElement('option');
+                    option.value = department[0];
+                    option.text = department[0];
+                    departmentDropdowns.forEach(dropdown => dropdown.add(option.cloneNode(true)));
+                });
+            })
+            .catch(error => console.error('Error fetching departments:', error));
+
+        function addWorkerField() {
+            var tableBody = document.querySelector('#workerTable tbody');
+            var workerRow = document.querySelector('.worker-data');
+            var clonedRow = workerRow.cloneNode(true);
+            clonedRow.querySelectorAll('input').forEach(input => input.value = '');
+            tableBody.appendChild(clonedRow);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<h1>{{ projectname }}</h1>
+<br>
+<a href="{{ url_for('inventory', projectname=projectname)}}">Inventory</a><br>
+<a href="{{ url_for('weather', projectname=projectname)}}">Weather</a><br>
+<a href="{{ url_for('cad_index', projectname=projectname)}}">Cad</a><br>
+<a href="{{ url_for('manpower_index', projectname=projectname)}}">Manpower</a><br>
+<a href="{{ url_for('machinery_list', projectname=projectname)}}">Machinery</a><br>
+<a href="{{ url_for('view_attendance', projectname=projectname) }}">Attendance</a><br>
+<a href="{{ url_for('predictivemaintenance', projectname=projectname)}}">Predictive Maintenance</a><br>
+<a href="{{ url_for('worklog', projectname=projectname)}}">Worklog</a><br>
+<a href="{{ url_for('chat_home', projectname=projectname)}}">Chat</a><br>
+
+<br><br>
+<a href="{{ url_for('project_profile', projectname=projectname)}}">Profile</a><br>
+<a href="{{ url_for('project_delete', projectname=projectname)}}">Delete</a>

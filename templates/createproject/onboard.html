@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Project</title>
+    <style>
+        .section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Create Project</h2>
+
+    <form action="/createproject" method="post">
+
+            Project Information
+
+            <label for="projectName">Project Name:</label>
+            <input type="text" id="projectName" name="projectName" required><br>
+
+            <label for="client">Client:</label>
+            <input type="text" id="client" name="client" required><br>
+
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type" required><br>
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required><br>
+
+            <label for="endDate">End/Estimated End Date:</label>
+            <input type="date" id="endDate" name="endDate" required><br>
+            
+            <label for="projectLocation">Project Location:</label>
+            <input type="text" id="projectLocation" name="projectLocation" required><br>
+
+<br>
+
+            Manpower
+
+            <div id="manpowerFields">
+                <div>
+                    <label for="department">Department:</label>
+                    <input type="text" name="department[]" required>
+
+                    <label for="numWorkers">Number of Workers:</label>
+                    <input type="number" name="numWorkers[]" required>
+                </div>
+            </div>
+
+            <button type="button" onclick="addManpowerField()">Add More</button>
+
+            <br><br>
+
+
+
+
+
+            Inventory
+
+            <div id="inventoryFields">
+                <div>
+                    <label for="item">Item:</label>
+                    <input type="text" name="item[]" required>
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity[]" required>
+
+                    <label for="rate">Rate:</label>
+                    <input type="number" name="rate[]" required>
+                </div>
+            </div>
+
+            <button type="button" onclick="addInventoryField()">Add More</button>
+            <br><br>
+<!-- Add this section for Equipment -->
+Equipment
+<div id="equipmentFields">
+    <div>
+        <label for="equipment">Equipment:</label>
+        <input type="text" name="equipment[]" required>
+
+        <label for="available">Available:</label>
+        <input type="number" name="available[]" required>
+
+        <label for="standby">Standby:</label>
+        <input type="number" name="standby[]" required>
+    </div>
+</div>
+<button type="button" onclick="addEquipmentField()">Add More</button>
+<br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+            function addEquipmentField() {
+        var container = document.getElementById('equipmentFields');
+        var newField = container.firstElementChild.cloneNode(true);
+
+        // Clear input values in the cloned field
+        newField.querySelectorAll('input').forEach(input => input.value = '');
+
+        container.appendChild(newField);
+    }
+        function addManpowerField() {
+            var container = document.getElementById('manpowerFields');
+            var newField = container.firstElementChild.cloneNode(true);
+
+            // Clear input values in the cloned field
+            newField.querySelectorAll('input').forEach(input => input.value = '');
+
+            container.appendChild(newField);
+        }
+
+        function addInventoryField() {
+            var container = document.getElementById('inventoryFields');
+            var newField = container.firstElementChild.cloneNode(true);
+
+            // Clear input values in the cloned field
+            newField.querySelectorAll('input').forEach(input => input.value = '');
+
+            container.appendChild(newField);
+        }
+    </script>
+
+</body>
+</html>

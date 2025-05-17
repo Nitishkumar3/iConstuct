@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <h1>File Upload</h1>
+    {% if success_message %}
+        <p style="color: green;">{{ success_message }}</p>
+    {% endif %}
+    <form action="{{ url_for('cad_convert', projectname=projectname) }}" method="post" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" placeholder="Enter title"><br><br>
+        <label for="file">Choose a file:</label>
+        <input type="file" name="file" id="file" accept=".dwg, .dxf" required>
+        <button type="submit">Upload</button>
+    </form>
+    {% if files %}
+        <h2>Uploaded Files</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Sno</th>
+                    <th>Title</th>
+                    <th>Edit</th>
+                    <th>View</th>
+                    <th>Download</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in files %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ file[1] }}</td>
+                        <td><a href="{{ url_for('cad_edit', filename=file[2], projectname=projectname) }}">Edit</a></td>
+                        <td><a href="{{ url_for('cad_view', filename=file[2], projectname=projectname) }}">View</a></td>
+                        <td><a href="{{ url_for('cad_download', filename=file[2], projectname=projectname) }}">Download</a></td>
+                        <td><a href="{{ url_for('cad_delete', filename=file[2], projectname=projectname) }}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>

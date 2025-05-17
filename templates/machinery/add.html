@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Machinery</title>
+</head>
+<body>
+    <h1>Add Machinery - {{ projectname }}</h1>
+
+    <form action="{{ url_for('machinery_add_data', projectname=projectname) }}" method="post">
+        <label for="machine_name">Machine Name:</label>
+        <input type="text" id="machine_name" name="machine_name" required><br>
+
+        <label for="machine_description">Machine Description:</label>
+        <textarea id="machine_description" name="machine_description" required></textarea><br>
+
+        <label for="purchase_date">Purchase Date:</label>
+        <input type="date" id="purchase_date" name="purchase_date" required><br>
+
+        <label for="next_service_date">Next Service Date:</label>
+        <input type="date" id="next_service_date" name="next_service_date" required><br>
+
+        <label for="daily_operating_cost">Daily Operating Cost:</label>
+        <input type="number" id="daily_operating_cost" name="daily_operating_cost" step="0.01" required><br>
+
+        <label for="insurance_expiry">Insurance Expiry:</label>
+        <input type="date" id="insurance_expiry" name="insurance_expiry" required><br>
+
+        <label for="driver_name">Driver Name:</label>
+        <input type="text" id="driver_name" name="driver_name" required><br>
+
+        <label for="driving_license_expiry">Driving License Expiry:</label>
+        <input type="date" id="driving_license_expiry" name="driving_license_expiry" required><br>
+
+        <label for="vehicle_registration_number">Vehicle Registration Number:</label>
+        <input type="text" id="vehicle_registration_number" name="vehicle_registration_number" required><br>
+
+        <button type="submit">Add Machinery</button>
+    </form>
+
+    <a href="{{ url_for('machinery_list', projectname=projectname) }}">Back to Machinery List</a>
+</body>
+</html>

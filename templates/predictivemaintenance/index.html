@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Predictive Maintenance</title>
+  </head>
+  <body>
+      <h1>Predictive Maintenance</h1>
+      <a href="{{ url_for('predictivemaintenance_data', projectname=projectname) }}">Live Data</a><br><br>
+      {{ table_data | safe }}
+  </body>
+</html>
+

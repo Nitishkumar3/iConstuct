@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machinery List</title>
+</head>
+<body>
+    <h1>Machinery List - {{ projectname }}</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Machine Name</th>
+                <th>Machine Description</th>
+                <th>Purchase Date</th>
+                <th>Next Service Date</th>
+                <th>Daily Operating Cost</th>
+                <th>Insurance Expiry</th>
+                <th>Driver Name</th>
+                <th>Driving License Expiry</th>
+                <th>Vehicle Registration Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if machinery_list %}
+                {% for machine in machinery_list %}
+                    <tr>
+                        <td>{{ machine[0] }}</td>
+                        <td>{{ machine[1] }}</td>
+                        <td>{{ machine[2] }}</td>
+                        <td>{{ machine[3] }}</td>
+                        <td>{{ machine[4] }}</td>
+                        <td>{{ machine[5] }}</td>
+                        <td>{{ machine[6] }}</td>
+                        <td>{{ machine[7] }}</td>
+                        <td>{{ machine[8] }}</td>
+                        <td>{{ machine[9] }}</td>
+                        <td>
+                            <a href="{{ url_for('machinery_edit_form', projectname=projectname, machine_id=machine[0]) }}">Edit</a>
+                            <a href="{{ url_for('machinery_delete', projectname=projectname, machine_id=machine[0]) }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="13">No machinery data available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('machinery_add_form', projectname=projectname) }}">Add Machinery</a>
+</body>
+</html>

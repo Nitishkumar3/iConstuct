@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Worker</title>
+</head>
+<body>
+    <h2>Edit Worker Data</h2>
+
+    <form method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="{{ worker_data[2] }}" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" name="phone" value="{{ worker_data[3] }}" required>
+
+        <label for="department">Department:</label>
+        <input type="text" name="department" value="{{ worker_data[4] }}" required>
+
+        <label for="aadharid">Aadhar ID:</label>
+        <input type="text" name="aadharid" value="{{ worker_data[5] }}" required>
+
+        <label for="nativecity">Native City:</label>
+        <input type="text" name="nativecity" value="{{ worker_data[6] }}" required>
+
+        <label for="emergencycontact">Emergency Contact:</label>
+        <input type="tel" name="emergencycontact" value="{{ worker_data[7] }}" required>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>
